@@ -7,6 +7,8 @@
 package com.example.wearsshclient.presentation
 
 import android.os.Bundle
+import android.os.StrictMode
+import android.os.StrictMode.ThreadPolicy
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -25,11 +27,18 @@ import androidx.wear.compose.material.Text
 import com.example.wearsshclient.R
 import com.example.wearsshclient.presentation.theme.WearSSHClientTheme
 
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val oldThreadPolicy = StrictMode.getThreadPolicy()
+        StrictMode.setThreadPolicy(
+            StrictMode.ThreadPolicy.Builder(oldThreadPolicy)
+                .permitAll().build())
         setContent {
-            WearApp("Android")
+            WearApp(kossh.impl.SSH.once("localhost", "tester", "test") {
+                execute("""echo "Hello World from $(hostname)" """)
+            })
         }
     }
 }
@@ -43,8 +52,8 @@ fun WearApp(greetingName: String) {
          */
         Column(
                 modifier = Modifier
-                        .fillMaxSize()
-                        .background(MaterialTheme.colors.background),
+                    .fillMaxSize()
+                    .background(MaterialTheme.colors.background),
                 verticalArrangement = Arrangement.Center
         ) {
             Greeting(greetingName = greetingName)

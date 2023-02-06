@@ -14,3 +14,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Wear SSH Client"
 include ':app'
+include ':kossh'
+project(':kossh').projectDir = new File('./app/libs/kossh')
