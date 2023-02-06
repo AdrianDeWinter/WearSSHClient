@@ -1,0 +1,3 @@
+[submodule "app/libs/kossh"]
+	path = app/libs/kossh
+	url = https://github.com/AdrianDeWinter/kossh.git
