@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.wearsshclient'
+    namespace 'de.martin_blecker.wearsshclient'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.wearsshclient"
+        applicationId "de.martin_blecker.wearsshclient"
         minSdk 30
         targetSdk 33
         versionCode 1

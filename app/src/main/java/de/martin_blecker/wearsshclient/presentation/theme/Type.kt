@@ -1,4 +1,4 @@
-package com.example.wearsshclient.presentation.theme
+package de.martin_blecker.wearsshclient.presentation.theme
 
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily

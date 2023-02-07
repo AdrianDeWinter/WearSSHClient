@@ -1,14 +1,7 @@
-/* While this template provides a good starting point for using Wear Compose, you can always
- * take a look at https://github.com/android/wear-os-samples/tree/main/ComposeStarter and
- * https://github.com/android/wear-os-samples/tree/main/ComposeAdvanced to find the most up to date
- * changes to the libraries and their usages.
- */
-
-package com.example.wearsshclient.presentation
+package de.martin_blecker.wearsshclient.presentation
 
 import android.os.Bundle
 import android.os.StrictMode
-import android.os.StrictMode.ThreadPolicy
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -24,8 +17,9 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
-import com.example.wearsshclient.R
-import com.example.wearsshclient.presentation.theme.WearSSHClientTheme
+import de.martin_blecker.wearsshclient.R
+import de.martin_blecker.wearsshclient.presentation.theme.WearSSHClientTheme
+import kossh.impl.SSH
 
 
 class MainActivity : ComponentActivity() {
@@ -36,39 +30,30 @@ class MainActivity : ComponentActivity() {
             StrictMode.ThreadPolicy.Builder(oldThreadPolicy)
                 .permitAll().build())
         setContent {
-            WearApp(kossh.impl.SSH.once("localhost", "tester", "test") {
-                execute("""echo "Hello World from $(hostname)" """)
+            WearApp(SSH.once("localhost", "tester", "test") {
+                execute("""ls -l""")
             })
         }
     }
 }
 
 @Composable
-fun WearApp(greetingName: String) {
+fun WearApp(content: String) {
     WearSSHClientTheme {
-        /* If you have enough items in your list, use [ScalingLazyColumn] which is an optimized
-         * version of LazyColumn for wear devices with some added features. For more information,
-         * see d.android.com/wear/compose.
-         */
         Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(MaterialTheme.colors.background),
                 verticalArrangement = Arrangement.Center
         ) {
-            Greeting(greetingName = greetingName)
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colors.primary,
+                text = content
+            )
         }
     }
-}
-
-@Composable
-fun Greeting(greetingName: String) {
-    Text(
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colors.primary,
-            text = stringResource(R.string.hello_world, greetingName)
-    )
 }
 
 @Preview(device = Devices.WEAR_OS_SMALL_ROUND, showSystemUi = true)

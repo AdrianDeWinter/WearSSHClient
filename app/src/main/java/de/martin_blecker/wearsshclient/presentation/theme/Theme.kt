@@ -1,7 +1,8 @@
-package com.example.wearsshclient.presentation.theme
+package de.martin_blecker.wearsshclient.presentation.theme
 
 import androidx.compose.runtime.Composable
 import androidx.wear.compose.material.MaterialTheme
+import androidx.wear.compose.material.Shapes
 
 @Composable
 fun WearSSHClientTheme(

@@ -1,4 +1,4 @@
-package com.example.wearsshclient.presentation.theme
+package de.martin_blecker.wearsshclient.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 import androidx.wear.compose.material.Colors
